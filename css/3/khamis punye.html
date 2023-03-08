@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form name="myForm">
+    <label>Name</label>
+    <input type="tex" name="name">
+    <label>Name</label>
+    <input type="tex" name="name">
+    <label>Name</label>
+    <input type="tex" name="name">
+    <label>Name</label>
+    <input type="tex" name="name">
+
+    <input type="submit" name="submit"><br>
+
+    <span id="success"></span>
+  </form>
+  <script>
+    const scriptURL =
+    const form = document.forms['myForm']
+    const success = document.getElementById('success');
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData (form)})
+                .then(response => {
+                  success.innerHTML="data successfully submit";
+                })
+                .catch(console.error => consol.error('Error!,error.message'))
+            })
+  </script>
+</body>
+</html>

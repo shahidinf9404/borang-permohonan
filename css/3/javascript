@@ -1,0 +1,13 @@
+<script>
+    const scriptURL = ''
+    const form = document.forms['myForm']
+    const success = document.getElementById('success');
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData (form)})
+                .then(response => {
+                        success.innerHTML="data successfully submit";
+                    })
+                    .catch(console.error => consol.error('Error!,error.message'))
+            })
+</script>

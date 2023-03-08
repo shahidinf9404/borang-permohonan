@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        *
+        {
+            margin: 0;
+        }
+        body
+        {
+            width: 100%;
+            height: 100vh;
+            background: orange;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form
+        {
+            width: 190px;
+            height: auto;
+            padding: 40px;
+            border-radius: 10px;
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <form name="submit-to-google-sheet">
+        <label>Name</label><br>
+        <input type="text" name="name" ><br><br> 
+        <label>email</label><br>  
+        <input type="email" name="email" ><br><br>
+        <label>Peralatan tambahan yang diperlukan (nyatakan):</label><br>
+        <input type="radio" name="a" value="Perlukan Komputer Riba" ><label> Komputer Riba</label>
+        <input type="radio" name="b" value="Perlukan Papan Putih" ><label> Papan Putih</label><br>
+        <input type="radio" name="c" value="Perlukan Projektor LCD/DLP"><label> Projektor LCD/DLP</label><br>
+        <input type="submit" name="submit"><br>
+
+        <span id="success"></span>
+    </form>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzMECehmTRJ1_gmWK9K0Ol_LKcUh0LRTew5KMLc7LCslcVvo-UPbToHeyrsodWgHpFPwA/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const success = document.getElementById('success');
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                success.innerHTML="Borang Anda Telah Berjaya Dihantar!";
+
+                setTimeout(function()
+                {
+                    success.innerHTML=""
+                },5000)
+                form.reset();
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>      
+</body>
+</html>
